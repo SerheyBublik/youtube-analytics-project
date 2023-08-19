@@ -26,7 +26,8 @@ docs: https://developers.google.com/youtube/v3/docs/channels/list
 сервис для быстрого получения id канала: https://commentpicker.com/youtube-channel-id.php
 '''
 # channel_id = 'UC-OVMPlMA3-YCIeg4z5z23A'  # MoscowPython
-channel_id = 'UCwHL6WHUarjGfUM_586me8w'  # HighLoad Channel
+channel_id = 'UCvA55-2D-E5du3YUGqrDv6A'  # My
+# channel_id = 'UCwHL6WHUarjGfUM_586me8w'  # HighLoad Channel
 channel = youtube.channels().list(id=channel_id, part='snippet,statistics').execute()
 printj(channel)
 
