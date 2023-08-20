@@ -26,7 +26,8 @@ docs: https://developers.google.com/youtube/v3/docs/channels/list
 сервис для быстрого получения id канала: https://commentpicker.com/youtube-channel-id.php
 '''
 # channel_id = 'UC-OVMPlMA3-YCIeg4z5z23A'  # MoscowPython
-channel_id = 'UCvA55-2D-E5du3YUGqrDv6A'  # My
+# channel_id = 'UCvA55-2D-E5du3YUGqrDv6A'  # Сергей Бублик
+channel_id = 'UCmP2Q7bl2PnwtTfit3MYA7A'  # Aloe Vera
 # channel_id = 'UCwHL6WHUarjGfUM_586me8w'  # HighLoad Channel
 channel = youtube.channels().list(id=channel_id, part='snippet,statistics').execute()
 printj(channel)
@@ -54,7 +55,8 @@ docs: https://developers.google.com/youtube/v3/docs/playlistItems/list
 https://www.youtube.com/playlist?list=PLH-XmS0lSi_zdhYvcwUfv0N88LQRt6UZn
 или из ответа API: см. playlists выше
 '''
-playlist_id = 'PLH-XmS0lSi_zdhYvcwUfv0N88LQRt6UZn'
+# playlist_id = 'PLH-XmS0lSi_zdhYvcwUfv0N88LQRt6UZn'
+playlist_id = 'PLMkvSF_Cq4sdl0eqsrf53C21qD6HAVJXL'  # 'stomatolog'
 playlist_videos = youtube.playlistItems().list(playlistId=playlist_id,
                                                part='contentDetails',
                                                maxResults=50,
@@ -63,7 +65,7 @@ playlist_videos = youtube.playlistItems().list(playlistId=playlist_id,
 
 # получить все id видеороликов из плейлиста
 video_ids: list[str] = [video['contentDetails']['videoId'] for video in playlist_videos['items']]
-# print(video_ids)
+print(video_ids)
 
 
 '''
@@ -73,7 +75,7 @@ docs: https://developers.google.com/youtube/v3/docs/videos/list
 video_response = youtube.videos().list(part='contentDetails,statistics',
                                        id=','.join(video_ids)
                                        ).execute()
-# printj(video_response)
+printj(video_response)
 
 for video in video_response['items']:
     # YouTube video duration is in ISO 8601 format
@@ -87,7 +89,8 @@ for video in video_response['items']:
 получить id можно из адреса видео
 https://www.youtube.com/watch?v=gaoc9MPZ4bw или https://youtu.be/gaoc9MPZ4bw
 '''
-video_id = 'gaoc9MPZ4bw'
+# video_id = 'gaoc9MPZ4bw'
+video_id = 'FgbENG3riOY'  # Symptomatic AP 1.6
 video_response = youtube.videos().list(part='snippet,statistics,contentDetails,topicDetails',
                                        id=video_id
                                        ).execute()
@@ -96,3 +99,4 @@ video_title: str = video_response['items'][0]['snippet']['title']
 view_count: int = video_response['items'][0]['statistics']['viewCount']
 like_count: int = video_response['items'][0]['statistics']['likeCount']
 comment_count: int = video_response['items'][0]['statistics']['commentCount']
+print(video_title, view_count, like_count, comment_count)
